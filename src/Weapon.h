@@ -15,6 +15,9 @@ class Weapon
     uint8_t projectile_spread; // maximum of how much each projectile diverts from the targeted point (i.e. accuracy)
     ticks_t shot_delay; // delay between each shot/swing/whatever
     int8_t ammo_type; // if -1, infinite ammo/melee
+    uint16_t max_ammo; // maximum amount of ammo that can be carried
+    uint16_t clip_size; // max amount of ammo held in the gun at any given time
+    uint8_t reload_type; // 1 for clip reload, 2 for one at a time (pump-action shotguns etc.)
     uint8_t sound_id; // id number of weapon firing sound
     int16_t weapon_sprite_id; // id number for weapon sprite
     int16_t projectile_sprite_id; // id number for projectile sprite (if not hitscan), -1 for none
