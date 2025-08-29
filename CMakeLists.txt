@@ -23,12 +23,18 @@ target_sources(${EXECUTABLE_NAME}
 PRIVATE 
     src/Main.cpp
     src/Draw.cpp
+    src/Vectors.cpp
     src/Video.cpp
 )
     
 # Set C++ version
 target_compile_features(${EXECUTABLE_NAME} PUBLIC cxx_std_17)
 
+# Set paths to SDL libraries and include them in the project
+set(SDL3_DIR D:/Dev/SDL3/cmake)
+set(SDL3_image_DIR D:/Dev/SDL3_image/cmake)
+set(SDL3_ttf_DIR D:/Dev/SDL3_ttf/cmake)
+set(SDL2_mixer_DIR D:/Dev/SDL2_mixer/cmake)
 find_package(SDL3 REQUIRED)
 find_package(SDL3_image REQUIRED)
 find_package(SDL3_ttf REQUIRED)

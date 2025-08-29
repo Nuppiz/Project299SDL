@@ -1,9 +1,8 @@
 *.cmake
-*.sln
-*.vcxproj
-*.vcxproj.*
 .vs/
+ALL_BUILD*
 CMakeCache.txt
+ZERO_CHECK*
 build/.vs
 build/CMakeCache.txt
 build/CMakeFiles
