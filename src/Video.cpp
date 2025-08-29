@@ -8,6 +8,7 @@ int VideoSystem::initVideoSystem()
         return 3;
     }
 }
+
 void VideoSystem::deInitVideoSystem()
 {
     SDL_DestroyRenderer(renderer);

@@ -4,7 +4,7 @@
 class DrawFunc
 {
 public:
-    void drawRectangle();
+    static void drawRectangle();
 };
 
 #endif /* DRAW_H */

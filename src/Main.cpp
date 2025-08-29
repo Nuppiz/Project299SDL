@@ -5,12 +5,11 @@
 VideoSystem VideoSys;
 
 int WinMain(int argc, char* argv[]) {
-    DrawFunc DrawStuff;
 
     SDL_Init(SDL_INIT_VIDEO);
 
     VideoSys.initVideoSystem();
-    DrawStuff.drawRectangle();
+    DrawFunc::drawRectangle();
     VideoSys.deInitVideoSystem();
     SDL_Quit();
 
