@@ -47,7 +47,7 @@ class EnemyActor : public Actor
 
 class PlayerActor : public Actor
 {
-    // additional weaon slots
+    // additional weapon slots
     int weapon_id_3;
     int weapon_id_4;
     int weapon_id_5;

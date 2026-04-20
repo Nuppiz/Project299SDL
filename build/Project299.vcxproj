@@ -400,6 +400,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Square.cpp" />
     <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Main.cpp" />
     <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Draw.cpp" />
     <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Vectors.cpp" />
