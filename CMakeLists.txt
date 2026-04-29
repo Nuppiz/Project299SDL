@@ -16,13 +16,18 @@ if(MSVC)
 endif()
 
 # Create an executable or a shared library based on the platform and add our sources to it
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
 set(EXECUTABLE_NAME ${PROJECT_NAME})
 add_executable(${EXECUTABLE_NAME})
 
-target_sources(${EXECUTABLE_NAME} 
-PRIVATE 
+target_sources(${EXECUTABLE_NAME}
+PRIVATE
     src/Main.cpp
+    src/Bullet.cpp
+    src/Controls.cpp
     src/Draw.cpp
+    src/Square.cpp
+    src/Tile.cpp
     src/Vectors.cpp
     src/Video.cpp
 )

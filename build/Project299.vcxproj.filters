@@ -4,16 +4,25 @@
     <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Controls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Square.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Vectors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Video.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Square.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
