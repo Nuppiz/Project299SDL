@@ -1,5 +1,5 @@
 #include "Commoninc.h"
-#include "Commonstruct.h"
+#include "Vectors.h"
 
 /* Vector calculations */
 

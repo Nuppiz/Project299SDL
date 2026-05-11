@@ -4,7 +4,13 @@
     <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Actor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Controls.cpp">

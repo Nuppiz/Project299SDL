@@ -1,38 +1,54 @@
 #include "Commoninc.h"
+#include "Actor.h"
 #include "Bullet.h"
 #include "Controls.h"
 #include "Draw.h"
-#include "Square.h"
 #include "Tile.h"
 #include "Video.h"
 
 VideoSystem VideoSys;
 
-KeyBindings wasd  { SDL_SCANCODE_W, SDL_SCANCODE_A, SDL_SCANCODE_D };
-KeyBindings empty {};
+static PlayerActor player;
 
-static Square greenSquare (64.0f,  220.0f, 32.0f, 200.0f, 0,   255, 0);
-static Square redSquare   (200.0f, 400.0f, 32.0f, 100.0f, 255, 0,   0,   AIBehavior::PATROL,       200.0f, 400.0f);
-static Square blueSquare  (140.0f, 220.0f, 32.0f, 0.0f,   0,   0,   255, AIBehavior::JUMP_IN_PLACE, 0.0f,   0.0f,  0.8f);
-static Square yellowSquare(500.0f, 220.0f, 32.0f, 120.0f, 255, 255, 0,   AIBehavior::JUMP_AND_MOVE, 480.0f, 580.0f, 1.2f);
+static const int ENEMY_COUNT = 3;
+static EnemyActor enemies[ENEMY_COUNT];
 
 static void gameUpdate(float deltaTime, int winW, int winH)
 {
+    const bool* keys = SDL_GetKeyboardState(nullptr);
+    player.control = 0;
+    if (keys[SDL_SCANCODE_A]) player.control |= CTRL_LEFT;
+    if (keys[SDL_SCANCODE_D]) player.control |= CTRL_RIGHT;
+    if (keys[SDL_SCANCODE_W]) player.control |= CTRL_JUMP;
+
+    float centerX    = player.position.x + player.radius_w / 2.0f;
+    float centerY    = player.position.y + player.radius_h / 2.0f;
+    player.angle     = atan2((double)(mousePos.y - centerY), (double)(mousePos.x - centerX));
+
     if (mouseLeftClicked)
-        fireBullet(greenSquare.x + greenSquare.size / 2,
-                   greenSquare.y + greenSquare.size / 2,
-                   mousePos.x, mousePos.y);
+    {
+        fireBullet(centerX, centerY, mousePos.x, mousePos.y);
+        player.shootTimer = SHOOT_ANIM_DURATION;
+    }
+
+    player.update(deltaTime, winW, winH);
+    player.updateAnimation(deltaTime);
+
+    for (int i = 0; i < ENEMY_COUNT; i++)
+    {
+        enemies[i].updateAI(deltaTime, player.position);
+        enemies[i].update(deltaTime, winW, winH);
+        enemies[i].updateAnimation(deltaTime);
+    }
+
+    for (int i = 0; i < ENEMY_COUNT; i++)
+    {
+        player.resolveCollision(enemies[i]);
+        for (int j = i + 1; j < ENEMY_COUNT; j++)
+            enemies[i].resolveCollision(enemies[j]);
+    }
 
     updateBullets(deltaTime);
-
-    greenSquare.update(deltaTime, winW, winH, wasd);
-    redSquare.update(deltaTime, winW, winH, empty);
-    blueSquare.update(deltaTime, winW, winH, empty);
-    yellowSquare.update(deltaTime, winW, winH, empty);
-
-    greenSquare.resolveCollision(redSquare);
-    greenSquare.resolveCollision(blueSquare);
-    greenSquare.resolveCollision(yellowSquare);
 }
 
 static void gameDraw()
@@ -41,10 +57,9 @@ static void gameDraw()
     SDL_RenderClear(VideoSys.renderer);
 
     Tile::draw(VideoSys.renderer);
-    greenSquare.draw(VideoSys.renderer);
-    redSquare.draw(VideoSys.renderer);
-    blueSquare.draw(VideoSys.renderer);
-    yellowSquare.draw(VideoSys.renderer);
+    player.draw(VideoSys.renderer);
+    for (int i = 0; i < ENEMY_COUNT; i++)
+        enemies[i].draw(VideoSys.renderer);
     drawBullets(VideoSys.renderer);
     drawReticle(VideoSys.renderer, mousePos.x, mousePos.y);
 
@@ -61,6 +76,19 @@ int WinMain(int argc, char* argv[]) {
         return 1;
     if (!Tile::loadTexture(VideoSys.renderer, "Bricks.png"))
         return 1;
+
+    player = spawnPlayer(64.0f, 220.0f);
+    if (!player.loadSpriteSheet(VideoSys.renderer, "Keen.png"))
+        return 1;
+
+    enemies[0] = spawnEnemy(200.0f, 400.0f, 100.0f, AI_PATROL,        200.0f, 400.0f, 1.0f, 200.0f, 80.0f);
+    enemies[1] = spawnEnemy(140.0f, 220.0f,   0.0f, AI_JUMP_IN_PLACE, 0.0f,   0.0f,   0.8f);
+    enemies[2] = spawnEnemy(500.0f, 220.0f, 120.0f, AI_JUMP_AND_MOVE, 480.0f, 580.0f, 1.2f, 250.0f, 80.0f);
+    for (int i = 0; i < ENEMY_COUNT; i++)
+    {
+        if (!enemies[i].loadSpriteSheet(VideoSys.renderer, "Rigelan.png"))
+            return 1;
+    }
 
     SDL_Event e;
     bool quit = false;

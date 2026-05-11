@@ -365,7 +365,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Main.cpp" />
+    <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Actor.cpp" />
     <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Bullet.cpp" />
+    <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Sprite.cpp" />
     <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Controls.cpp" />
     <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Draw.cpp" />
     <ClCompile Include="D:\Dev\Projects\C++\Project299SDL\src\Square.cpp" />

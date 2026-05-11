@@ -23,7 +23,9 @@ add_executable(${EXECUTABLE_NAME})
 target_sources(${EXECUTABLE_NAME}
 PRIVATE
     src/Main.cpp
+    src/Actor.cpp
     src/Bullet.cpp
+    src/Sprite.cpp
     src/Controls.cpp
     src/Draw.cpp
     src/Square.cpp

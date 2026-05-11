@@ -2,6 +2,7 @@
 #define TILE_H
 
 #include "Commoninc.h"
+#include "Commonstruct.h"
 
 enum TileType
 {
@@ -23,6 +24,7 @@ public:
     static void draw(SDL_Renderer* renderer);
     static bool isWall(int col, int row);
     static bool collidesWithWalls(float x, float y, float size);
+    static bool hasLineOfSight(Vec2 from, Vec2 to);
 
     static SDL_Texture* wallTexture;
     static std::string  wallTextureFile;

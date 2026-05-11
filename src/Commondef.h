@@ -5,7 +5,7 @@
 
 #include "Commoninc.h"
 
-typedef long time_t;
+typedef long time_type;
 typedef long ticks_t;
 typedef uint16_t id_t;
 typedef uint16_t flags_t;

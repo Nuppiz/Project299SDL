@@ -84,6 +84,28 @@ bool Tile::isWall(int col, int row)
     return tileMap[row][col] == TILE_WALL;
 }
 
+bool Tile::hasLineOfSight(Vec2 from, Vec2 to)
+{
+    float dx   = to.x - from.x;
+    float dy   = to.y - from.y;
+    float dist = sqrtf(dx * dx + dy * dy);
+    if (dist < 1.0f) return true;
+
+    float nx = dx / dist;
+    float ny = dy / dist;
+    const float STEP = (float)TILE_SIZE / 2.0f;
+    float traveled = 0.0f;
+
+    while (traveled < dist)
+    {
+        int col = (int)((from.x + nx * traveled) / TILE_SIZE);
+        int row = (int)((from.y + ny * traveled) / TILE_SIZE);
+        if (isWall(col, row)) return false;
+        traveled += STEP;
+    }
+    return true;
+}
+
 bool Tile::collidesWithWalls(float x, float y, float size)
 {
     // Check all four corners of the square against the tile grid
