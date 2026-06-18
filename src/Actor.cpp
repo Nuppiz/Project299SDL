@@ -135,7 +135,11 @@ void EnemyActor::updateAI(float deltaTime, const Vec2& playerPos)
             bool hitBound = (aiMoveDir > 0 && position.x >= patrolRight)
                          || (aiMoveDir < 0 && position.x <= patrolLeft);
             bool hitWall  = Tile::collidesWithWalls(position.x + aiMoveDir, position.y, (float)radius_w);
-            if (hitBound || hitWall) aiMoveDir = -aiMoveDir;
+            int  ledgeCol = (aiMoveDir > 0) ? (int)((position.x + radius_w) / TILE_SIZE)
+                                            : (int)((position.x - 1) / TILE_SIZE);
+            int  ledgeRow = (int)((position.y + radius_h) / TILE_SIZE);
+            bool atLedge  = onGround && !Tile::isWall(ledgeCol, ledgeRow);
+            if (hitBound || hitWall || atLedge) aiMoveDir = -aiMoveDir;
             control |= (aiMoveDir > 0) ? CTRL_RIGHT : CTRL_LEFT;
             break;
         }
@@ -153,7 +157,11 @@ void EnemyActor::updateAI(float deltaTime, const Vec2& playerPos)
             bool hitBound = (aiMoveDir > 0 && position.x >= patrolRight)
                          || (aiMoveDir < 0 && position.x <= patrolLeft);
             bool hitWall  = Tile::collidesWithWalls(position.x + aiMoveDir, position.y, (float)radius_w);
-            if (hitBound || hitWall) aiMoveDir = -aiMoveDir;
+            int  ledgeCol = (aiMoveDir > 0) ? (int)((position.x + radius_w) / TILE_SIZE)
+                                            : (int)((position.x - 1) / TILE_SIZE);
+            int  ledgeRow = (int)((position.y + radius_h) / TILE_SIZE);
+            bool atLedge  = onGround && !Tile::isWall(ledgeCol, ledgeRow);
+            if (hitBound || hitWall || atLedge) aiMoveDir = -aiMoveDir;
             control |= (aiMoveDir > 0) ? CTRL_RIGHT : CTRL_LEFT;
             jumpTimer -= deltaTime;
             if (jumpTimer <= 0.0f && onGround)
